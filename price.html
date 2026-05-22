@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <title>Krishna Sofa & Furnishing | Premium Manufacturing Calculator</title>
+  <!-- Google Fonts: Outfit for modern elegance -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom CSS for premium glassmorphism + dark total bill section + perfect mobile -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, #faf9f6 0%, #f0f3f8 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Soft floating ethereal orbs - light & serene */
+    .soft-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(75px);
+      pointer-events: none;
+      z-index: 0;
+      animation: floatSoft 22s infinite alternate ease-in-out;
+    }
+
+    .orb-light-1 {
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(210, 180, 140, 0.35), rgba(245, 225, 190, 0.15));
+      top: -150px;
+      right: -80px;
+    }
+
+    .orb-light-2 {
+      width: 560px;
+      height: 560px;
+      background: radial-gradient(circle, rgba(180, 210, 245, 0.35), rgba(200, 225, 250, 0.12));
+      bottom: -180px;
+      left: -120px;
+      animation-delay: -6s;
+    }
+
+    .orb-light-3 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 235, 190, 0.4), rgba(250, 220, 160, 0.2));
+      top: 30%;
+      left: 15%;
+      animation-duration: 26s;
+    }
+
+    @keyframes floatSoft {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.5;
+      }
+      100% {
+        transform: translate(35px, 40px) scale(1.1);
+        opacity: 0.7;
+      }
+    }
+
+    /* Premium Glassmorphism Card - light, airy, elegant */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.06), 0 0 0 0.5px rgba(255, 245, 230, 0.7) inset;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(200, 170, 110, 0.4);
+      box-shadow: 0 25px 40px -18px rgba(0, 0, 0, 0.1);
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Dark total bill section - premium deep card */
+    .dark-total-card {
+      background: linear-gradient(145deg, #1a1e2c, #0f121f);
+      backdrop-filter: blur(16px);
+      border-radius: 2rem;
+      border: 1px solid rgba(255, 215, 150, 0.25);
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.4), 0 0 0 0.5px rgba(255, 200, 100, 0.2) inset;
+      transition: all 0.35s ease;
+    }
+
+    .dark-total-card:hover {
+      border-color: rgba(255, 200, 120, 0.5);
+      box-shadow: 0 30px 50px -18px rgba(0, 0, 0, 0.5);
+      transform: translateY(-3px);
+    }
+
+    /* Premium inputs */
+    .premium-input {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #e8e2d4;
+      border-radius: 28px;
+      padding: 12px 18px;
+      font-weight: 500;
+      color: #3e2c1f;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      width: 100%;
+      outline: none;
+      font-family: 'Outfit', monospace;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    }
+
+    .premium-input:focus {
+      border-color: #c9a87b;
+      box-shadow: 0 0 0 3px rgba(200, 160, 110, 0.2), 0 0 0 1px #f0e2cf;
+      background: white;
+    }
+
+    .input-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      font-weight: 600;
+      color: #8b765c;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    /* summary row hover for dark card */
+    .summary-row-dark {
+      transition: all 0.2s;
+      border-radius: 20px;
+      padding: 6px 8px;
+    }
+    .summary-row-dark:hover {
+      background: rgba(255, 215, 150, 0.12);
+      transform: translateX(4px);
+    }
+
+    /* Glowing total amount with golden gradient */
+    .glow-total-dark {
+      background: linear-gradient(135deg, #f5e7c8, #ffd98c, #ffc061);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 20px rgba(255, 200, 100, 0.3);
+      letter-spacing: -0.01em;
+    }
+
+    /* Premium button - elegant */
+    .btn-light-premium {
+      background: linear-gradient(105deg, #ffffff, #fcf8f2);
+      border: 1px solid rgba(200, 170, 120, 0.4);
+      padding: 14px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: #8b6239;
+      transition: all 0.25s;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+      cursor: pointer;
+    }
+
+    .btn-light-premium:hover {
+      background: white;
+      border-color: #c9a269;
+      box-shadow: 0 12px 22px -12px rgba(120, 80, 40, 0.15);
+      transform: scale(0.98);
+      color: #a57244;
+    }
+
+    .reset-btn {
+      background: rgba(255, 245, 235, 0.9);
+      border: 1px solid #e2cfb5;
+      color: #9b7a54;
+    }
+    .reset-btn:hover {
+      background: #fdf5e6;
+      border-color: #c2a06a;
+      transform: translateY(-1px);
+    }
+
+    hr {
+      border-color: rgba(160, 130, 90, 0.2);
+      margin: 1rem 0;
+    }
+
+    .extra-row-card {
+      background: rgba(250, 245, 238, 0.8);
+      border-radius: 1.5rem;
+      border: 1px solid rgba(210, 180, 140, 0.5);
+      transition: all 0.2s;
+    }
+    
+    .extra-row-card:hover {
+      background: rgba(255, 248, 235, 0.9);
+      border-color: rgba(200, 160, 110, 0.7);
+    }
+
+    /* Mobile perfect spacing */
+    @media (max-width: 768px) {
+      .glass-card {
+        border-radius: 1.5rem;
+        padding: 1.25rem !important;
+      }
+      .premium-input {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+      }
+      .dark-total-card {
+        border-radius: 1.5rem;
+        padding: 1.25rem !important;
+      }
+      .input-label {
+        font-size: 0.65rem;
+        margin-bottom: 6px;
+      }
+      .btn-light-premium {
+        padding: 12px 16px;
+        font-size: 0.85rem;
+      }
+      .summary-row-dark {
+        padding: 4px 4px;
+      }
+    }
+
+    /* Fix for touch targets on mobile */
+    button, .remove-extra-btn, #addExtraBtn {
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    
+    .remove-extra-btn {
+      min-width: 70px;
+    }
+    
+    /* Prevent input zoom on mobile (font-size >=16px) */
+    @media (max-width: 640px) {
+      .premium-input {
+        font-size: 16px;
+      }
+    }
+
+    /* brand badge */
+    .krishna-badge {
+      background: rgba(255, 248, 235, 0.6);
+      border-radius: 60px;
+    }
+    
+    .sticky-summary {
+      position: sticky;
+      top: 24px;
+    }
+    
+    @media (max-width: 1024px) {
+      .sticky-summary {
+        position: relative;
+        top: 0;
+      }
+    }
+  </style>
+</head>
+<body class="relative font-['Outfit'] antialiased">
+
+  <!-- soft glowing shapes for light aesthetic -->
+  <div class="soft-orb orb-light-1"></div>
+  <div class="soft-orb orb-light-2"></div>
+  <div class="soft-orb orb-light-3"></div>
+
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-5 md:px-8 py-6 md:py-12">
+    <!-- Header with Krishna Sofa & Furnishing Branding -->
+    <div class="flex flex-wrap justify-between items-center mb-6 md:mb-10 gap-3">
+      <div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <h1 class="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight text-[#8b5e2e]">✨ Krishna Sofa & Furnishing</h1>
+          <span class="text-xl md:text-3xl">🪷</span>
+        </div>
+        <p class="text-[#9b8366] text-xs sm:text-sm mt-1 font-medium">Artisanal manufacturing · divine comfort · premium pricing studio</p>
+      </div>
+      <div class="krishna-badge backdrop-blur-sm px-4 py-1.5 rounded-full border border-[#e8dccc] shadow-sm text-xs font-medium text-[#a57848]">
+        ✦ Premium Craftsmanship ✦
+      </div>
+    </div>
+
+    <!-- 2-COLUMN GRID: responsive stacking -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
+      <!-- LEFT: INPUTS SECTION (7 cols desktop) -->
+      <div class="lg:col-span-7 space-y-5 md:space-y-6">
+
+        <!-- 1. Sofa Base Price - ALL ZERO INITIAL -->
+        <div class="glass-card p-5 md:p-7">
+          <div class="flex justify-between items-center mb-3">
+            <h2 class="text-lg md:text-xl font-semibold text-[#7b5a3a] tracking-tight">🛋️ Base Sofa Frame</h2>
+            <span class="text-[10px] md:text-xs bg-white/70 rounded-full px-3 py-1 text-[#a77b48] shadow-sm">core hardwood</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+            <div><label class="input-label">Total Fits</label><input type="number" id="baseFitsQty" value="0" step="1" min="0" class="premium-input"></div>
+            <div><label class="input-label">Per Fit Price (₹)</label><input type="number" id="basePerFitPrice" value="0" step="100" min="0" class="premium-input"></div>
+          </div>
+          <div class="mt-4 text-right text-sm font-medium text-[#8b765c]">auto total: <span id="baseTotalDisplay" class="text-[#b87c46] text-base md:text-lg font-bold">₹0</span></div>
+        </div>
+
+        <!-- 2. Super Soft - ZERO INITIAL -->
+        <div class="glass-card p-5 md:p-7">
+          <h2 class="text-lg md:text-xl font-semibold text-[#7b5a3a] mb-3">☁️ Super Soft Cushioning</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+            <div><label class="input-label">Fits (quantity)</label><input type="number" id="softFitsQty" value="0" step="1" min="0" class="premium-input"></div>
+            <div><label class="input-label">Per Fit Price (₹)</label><input type="number" id="softPerFitPrice" value="0" step="100" min="0" class="premium-input"></div>
+          </div>
+          <div class="mt-4 text-right text-sm font-medium text-[#8b765c]">runtime: <span id="softTotalDisplay" class="text-[#b87c46] font-bold">₹0</span></div>
+        </div>
+
+        <!-- 3. Sofa Cover - ZERO INITIAL -->
+        <div class="glass-card p-5 md:p-7">
+          <h2 class="text-lg md:text-xl font-semibold text-[#7b5a3a] mb-3">🧵 Premium Upholstery Cover</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+            <div><label class="input-label">Fits (quantity)</label><input type="number" id="coverFitsQty" value="0" step="1" min="0" class="premium-input"></div>
+            <div><label class="input-label">Per Fit Price (₹)</label><input type="number" id="coverPerFitPrice" value="0" step="100" min="0" class="premium-input"></div>
+          </div>
+          <div class="mt-4 text-right text-sm font-medium text-[#8b765c]">total: <span id="coverTotalDisplay" class="text-[#b87c46] font-bold">₹0</span></div>
+        </div>
+
+        <!-- 4. Sofa Tools - ZERO INITIAL -->
+        <div class="glass-card p-5 md:p-7">
+          <h2 class="text-lg md:text-xl font-semibold text-[#7b5a3a] mb-3">🔧 Assembly Tools Kit</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+            <div><label class="input-label">Quantity (sets)</label><input type="number" id="toolsQty" value="0" step="1" min="0" class="premium-input"></div>
+            <div><label class="input-label">Per Piece Price (₹)</label><input type="number" id="toolsPerPiece" value="0" step="50" min="0" class="premium-input"></div>
+          </div>
+          <div class="mt-4 text-right text-sm font-medium text-[#8b765c]">total: <span id="toolsTotalDisplay" class="text-[#b87c46] font-bold">₹0</span></div>
+        </div>
+
+        <!-- 5. Sofa Pillows - ZERO INITIAL -->
+        <div class="glass-card p-5 md:p-7">
+          <h2 class="text-lg md:text-xl font-semibold text-[#7b5a3a] mb-3">🪶 Decorative Pillows</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+            <div><label class="input-label">Quantity (pcs)</label><input type="number" id="pillowsQty" value="0" step="1" min="0" class="premium-input"></div>
+            <div><label class="input-label">Per Piece Price (₹)</label><input type="number" id="pillowsPerPiece" value="0" step="50" min="0" class="premium-input"></div>
+          </div>
+          <div class="mt-4 text-right text-sm font-medium text-[#8b765c]">total: <span id="pillowsTotalDisplay" class="text-[#b87c46] font-bold">₹0</span></div>
+        </div>
+
+        <!-- 6. Extra Charges with dynamic add - FIXED PERFECT FUNCTIONALITY -->
+        <div class="glass-card p-5 md:p-7">
+          <div class="flex justify-between items-center flex-wrap gap-3 mb-4">
+            <h2 class="text-lg md:text-xl font-semibold text-[#7b5a3a]">✨ Extra Furnishing Charges</h2>
+            <button id="addExtraBtn" class="text-xs bg-white/90 hover:bg-white rounded-full px-4 py-1.5 text-[#a57244] border border-[#decfa8] shadow-sm transition-all active:scale-95">+ Add Custom Fee</button>
+          </div>
+          <div id="extraChargesContainer" class="space-y-3">
+            <div class="text-center text-[#a58d6e] text-sm py-3 italic">Add delivery, carving, or special finishing</div>
+          </div>
+          <div class="mt-3 text-right text-[#ad9479] text-[10px] md:text-[11px]">each extra line adds to final bill</div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: DARK TOTAL BILL SECTION -->
+      <div class="lg:col-span-5">
+        <div class="dark-total-card p-5 md:p-7 sticky-summary">
+          <div class="flex justify-between items-center border-b border-[#ffd98c]/20 pb-3 md:pb-4 mb-4">
+            <span class="font-semibold text-[#f5e2b0] text-xs md:text-sm tracking-wide">🪷 TOTAL BILL</span>
+            <span class="bg-[#ffd98c]/15 text-[#ffda99] text-[9px] md:text-[10px] px-3 py-1 rounded-full font-medium">premium estimate</span>
+          </div>
+          <div class="space-y-2 md:space-y-3 text-sm">
+            <div class="summary-row-dark flex justify-between items-center">
+              <span class="text-[#cdba95] text-sm md:text-base">🛋️ Base Sofa</span>
+              <span id="summaryBase" class="font-mono font-semibold text-[#f5dcb5] text-sm md:text-base">₹0</span>
+            </div>
+            <div class="summary-row-dark flex justify-between items-center">
+              <span class="text-[#cdba95] text-sm md:text-base">☁️ Super Soft</span>
+              <span id="summarySoft" class="font-mono font-semibold text-[#f5dcb5] text-sm md:text-base">₹0</span>
+            </div>
+            <div class="summary-row-dark flex justify-between items-center">
+              <span class="text-[#cdba95] text-sm md:text-base">🧵 Cover</span>
+              <span id="summaryCover" class="font-mono font-semibold text-[#f5dcb5] text-sm md:text-base">₹0</span>
+            </div>
+            <div class="summary-row-dark flex justify-between items-center">
+              <span class="text-[#cdba95] text-sm md:text-base">🔧 Tools</span>
+              <span id="summaryTools" class="font-mono font-semibold text-[#f5dcb5] text-sm md:text-base">₹0</span>
+            </div>
+            <div class="summary-row-dark flex justify-between items-center">
+              <span class="text-[#cdba95] text-sm md:text-base">🪶 Pillows</span>
+              <span id="summaryPillows" class="font-mono font-semibold text-[#f5dcb5] text-sm md:text-base">₹0</span>
+            </div>
+            <div id="extraSummaryContainer" class="space-y-2 border-t border-[#ffd98c]/15 pt-3 mt-2">
+              <!-- dynamic extra summary rows -->
+            </div>
+          </div>
+          <hr class="my-4 md:my-5 border-[#ffd98c]/20">
+          <div class="flex justify-between items-end">
+            <span class="text-[#e6cf9e] text-xs md:text-sm font-semibold uppercase tracking-wide">Grand Total</span>
+            <div class="text-right">
+              <span id="grandTotalValue" class="glow-total-dark text-3xl md:text-5xl font-extrabold tracking-tight">₹0</span>
+              <div class="text-[9px] md:text-[11px] text-[#bcaa82] mt-1">incl. all charges</div>
+            </div>
+          </div>
+
+          <!-- Double button row: Reset & Quotation -->
+          <div class="flex gap-3 mt-6 md:mt-8">
+            <button id="resetAllBtn" class="reset-btn btn-light-premium w-1/2 flex items-center justify-center gap-1 md:gap-2 text-xs md:text-sm font-semibold py-3 md:py-3.5">
+              ⟳ Reset All
+            </button>
+            <button id="generateQuotationBtn" class="btn-light-premium w-1/2 flex items-center justify-center gap-1 md:gap-2 text-xs md:text-sm font-semibold py-3 md:py-3.5">
+              📄 Quotation
+            </button>
+          </div>
+          <div class="mt-4 text-center text-[9px] md:text-[11px] text-[#8f7e60] font-mono">live pricing • krishna furnishings</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // DOM references
+    const baseQty = document.getElementById('baseFitsQty');
+    const basePrice = document.getElementById('basePerFitPrice');
+    const baseTotalSpan = document.getElementById('baseTotalDisplay');
+    const softQty = document.getElementById('softFitsQty');
+    const softPrice = document.getElementById('softPerFitPrice');
+    const softTotalSpan = document.getElementById('softTotalDisplay');
+    const coverQty = document.getElementById('coverFitsQty');
+    const coverPrice = document.getElementById('coverPerFitPrice');
+    const coverTotalSpan = document.getElementById('coverTotalDisplay');
+    const toolsQty = document.getElementById('toolsQty');
+    const toolsPrice = document.getElementById('toolsPerPiece');
+    const toolsTotalSpan = document.getElementById('toolsTotalDisplay');
+    const pillowsQty = document.getElementById('pillowsQty');
+    const pillowsPrice = document.getElementById('pillowsPerPiece');
+    const pillowsTotalSpan = document.getElementById('pillowsTotalDisplay');
+
+    const summaryBase = document.getElementById('summaryBase');
+    const summarySoft = document.getElementById('summarySoft');
+    const summaryCover = document.getElementById('summaryCover');
+    const summaryTools = document.getElementById('summaryTools');
+    const summaryPillows = document.getElementById('summaryPillows');
+    const grandTotalSpan = document.getElementById('grandTotalValue');
+    const extraSummaryContainer = document.getElementById('extraSummaryContainer');
+
+    // extra charges array - each { id, name, price }
+    let extraCharges = [];
+
+    // Format INR
+    function formatINR(amount) {
+      return '₹' + Math.round(amount).toLocaleString('en-IN');
+    }
+
+    // Core calculation & UI update
+    function updateAllCalculations() {
+      // Base Sofa
+      let baseFits = parseFloat(baseQty.value) || 0;
+      let basePer = parseFloat(basePrice.value) || 0;
+      let baseTotal = baseFits * basePer;
+      baseTotalSpan.innerText = formatINR(baseTotal);
+
+      let softFits = parseFloat(softQty.value) || 0;
+      let softPer = parseFloat(softPrice.value) || 0;
+      let softTotal = softFits * softPer;
+      softTotalSpan.innerText = formatINR(softTotal);
+
+      let coverFits = parseFloat(coverQty.value) || 0;
+      let coverPer = parseFloat(coverPrice.value) || 0;
+      let coverTotal = coverFits * coverPer;
+      coverTotalSpan.innerText = formatINR(coverTotal);
+
+      let toolsQ = parseFloat(toolsQty.value) || 0;
+      let toolsPr = parseFloat(toolsPrice.value) || 0;
+      let toolsTotal = toolsQ * toolsPr;
+      toolsTotalSpan.innerText = formatINR(toolsTotal);
+
+      let pillowQ = parseFloat(pillowsQty.value) || 0;
+      let pillowPr = parseFloat(pillowsPrice.value) || 0;
+      let pillowsTotal = pillowQ * pillowPr;
+      pillowsTotalSpan.innerText = formatINR(pillowsTotal);
+
+      summaryBase.innerText = formatINR(baseTotal);
+      summarySoft.innerText = formatINR(softTotal);
+      summaryCover.innerText = formatINR(coverTotal);
+      summaryTools.innerText = formatINR(toolsTotal);
+      summaryPillows.innerText = formatINR(pillowsTotal);
+
+      // Extra charges sum and rebuild summary list
+      let extraSum = 0;
+      extraSummaryContainer.innerHTML = '';
+      if (extraCharges.length === 0) {
+        const emptyMsg = document.createElement('div');
+        emptyMsg.className = 'text-[#b29779] text-xs text-center py-1';
+        emptyMsg.innerText = 'no extra charges';
+        extraSummaryContainer.appendChild(emptyMsg);
+      } else {
+        extraCharges.forEach((charge) => {
+          let chargeAmount = parseFloat(charge.price) || 0;
+          extraSum += chargeAmount;
+          const row = document.createElement('div');
+          row.className = 'summary-row-dark flex justify-between items-center text-xs md:text-sm';
+          row.innerHTML = `
+            <span class="text-[#cdba95] flex items-center gap-1">✨ ${escapeHtml(charge.name)}</span>
+            <span class="font-mono font-medium text-[#ffda99]">${formatINR(chargeAmount)}</span>
+          `;
+          extraSummaryContainer.appendChild(row);
+        });
+      }
+
+      let grand = baseTotal + softTotal + coverTotal + toolsTotal + pillowsTotal + extraSum;
+      grandTotalSpan.innerText = formatINR(grand);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+      });
+    }
+
+    // Render dynamic extra input rows (left panel) - FIXED: stable IDs, no cursor jumping
+    function renderExtraInputs() {
+      const container = document.getElementById('extraChargesContainer');
+      if (!container) return;
+      if (extraCharges.length === 0) {
+        container.innerHTML = `<div class="text-center text-[#a58d6e] text-sm py-3 italic">Add delivery, carving, or special finishing</div>`;
+        updateAllCalculations();
+        return;
+      }
+      let html = '';
+      extraCharges.forEach((charge, idx) => {
+        html += `
+          <div class="extra-row-card p-3 rounded-2xl transition-all" data-extra-idx="${idx}">
+            <div class="flex flex-wrap gap-2 items-end">
+              <div class="flex-1 min-w-[120px]">
+                <label class="input-label text-[9px] md:text-[10px]">Charge name</label>
+                <input type="text" class="premium-input py-2 text-sm extra-name" value="${escapeHtml(charge.name)}" data-idx="${idx}" placeholder="e.g., Wood Carving">
+              </div>
+              <div class="flex-1 min-w-[100px]">
+                <label class="input-label text-[9px] md:text-[10px]">Amount (₹)</label>
+                <input type="number" class="premium-input py-2 text-sm extra-price" value="${charge.price}" step="100" min="0" data-idx="${idx}">
+              </div>
+              <button class="remove-extra-btn bg-[#f7efe3] hover:bg-[#efe2cf] text-[#9b7a54] rounded-full px-3 py-2 text-xs font-medium transition shadow-sm mt-1 sm:mt-0">✖ Remove</button>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+
+      // Attach fresh event listeners
+      document.querySelectorAll('.extra-name').forEach(inp => {
+        inp.removeEventListener('input', handleExtraNameChange);
+        inp.addEventListener('input', handleExtraNameChange);
+      });
+      document.querySelectorAll('.extra-price').forEach(inp => {
+        inp.removeEventListener('input', handleExtraPriceChange);
+        inp.addEventListener('input', handleExtraPriceChange);
+      });
+      document.querySelectorAll('.remove-extra-btn').forEach(btn => {
+        btn.removeEventListener('click', handleRemoveExtra);
+        btn.addEventListener('click', handleRemoveExtra);
+      });
+      updateAllCalculations();
+    }
+
+    function handleExtraNameChange(e) {
+      const idx = parseInt(e.target.getAttribute('data-idx'));
+      if (!isNaN(idx) && extraCharges[idx]) {
+        extraCharges[idx].name = e.target.value;
+        updateAllCalculations();
+        // No need to re-render entire list on name change to avoid cursor jump
+        // Just update summary, but keep inputs stable
+        // However we need to update summary display only
+        // We'll just update calculations without full re-render for name
+        // But summary uses extraCharges directly, so fine
+      }
+    }
+
+    function handleExtraPriceChange(e) {
+      const idx = parseInt(e.target.getAttribute('data-idx'));
+      if (!isNaN(idx) && extraCharges[idx]) {
+        extraCharges[idx].price = parseFloat(e.target.value) || 0;
+        updateAllCalculations();
+        // No full re-render to keep cursor stable
+      }
+    }
+
+    function handleRemoveExtra(e) {
+      const btn = e.target;
+      const parentDiv = btn.closest('[data-extra-idx]');
+      if (parentDiv) {
+        const idx = parseInt(parentDiv.getAttribute('data-extra-idx'));
+        if (!isNaN(idx) && extraCharges[idx]) {
+          extraCharges.splice(idx, 1);
+          renderExtraInputs(); // re-render because indices changed
+          updateAllCalculations();
+        }
+      }
+    }
+
+    function addExtraCharge() {
+      extraCharges.push({ id: Date.now(), name: 'Custom Service', price: 0 });
+      renderExtraInputs();
+      updateAllCalculations();
+    }
+
+    // RESET FUNCTION: set all values to ZERO and clear extra charges
+    function resetAllFields() {
+      baseQty.value = '0';
+      basePrice.value = '0';
+      softQty.value = '0';
+      softPrice.value = '0';
+      coverQty.value = '0';
+      coverPrice.value = '0';
+      toolsQty.value = '0';
+      toolsPrice.value = '0';
+      pillowsQty.value = '0';
+      pillowsPrice.value = '0';
+      
+      extraCharges = [];
+      renderExtraInputs();
+      updateAllCalculations();
+    }
+
+    // Attach listeners to main inputs
+    const allMainInputs = [baseQty, basePrice, softQty, softPrice, coverQty, coverPrice, toolsQty, toolsPrice, pillowsQty, pillowsPrice];
+    allMainInputs.forEach(inp => {
+      if (inp) inp.addEventListener('input', () => updateAllCalculations());
+    });
+
+    const addExtraBtn = document.getElementById('addExtraBtn');
+    if (addExtraBtn) addExtraBtn.addEventListener('click', addExtraCharge);
+
+    const resetBtn = document.getElementById('resetAllBtn');
+    if (resetBtn) resetBtn.addEventListener('click', resetAllFields);
+
+    // Quotation generation
+    const generateBtn = document.getElementById('generateQuotationBtn');
+    generateBtn.addEventListener('click', () => {
+      let grandVal = grandTotalSpan.innerText;
+      let lines = ["🪷 KRISHNA SOFA & FURNISHING", "═══════════════════════"];
+      lines.push(`Base Sofa Frame: ${summaryBase.innerText}`);
+      lines.push(`Super Soft Cushioning: ${summarySoft.innerText}`);
+      lines.push(`Premium Cover: ${summaryCover.innerText}`);
+      lines.push(`Assembly Tools: ${summaryTools.innerText}`);
+      lines.push(`Decorative Pillows: ${summaryPillows.innerText}`);
+      if (extraCharges.length) {
+        extraCharges.forEach(ex => lines.push(`✨ ${ex.name}: ${formatINR(ex.price || 0)}`));
+      }
+      lines.push("───────────────────");
+      lines.push(`GRAND TOTAL: ${grandVal}`);
+      lines.push("Thank you, divine craftsmanship assured.");
+      alert(lines.join("\n"));
+    });
+
+    // initial render - everything starts at zero
+    renderExtraInputs();
+    updateAllCalculations();
+  </script>
+</body>
+</html>
