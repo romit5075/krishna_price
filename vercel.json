@@ -1,4 +1,5 @@
 {
   "name": "krishna-price",
-  "buildCommand": "echo 'No build required for static site'"
+  "buildCommand": "echo 'No build required for static site'",
+  "outputDirectory": "."
 }
